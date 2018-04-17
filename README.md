@@ -1,0 +1,2 @@
+# mnozenie
+mnozenie
