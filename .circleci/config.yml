@@ -1,3 +1,7 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
 version: 2
 jobs:
   build:
@@ -17,17 +21,17 @@ steps:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-- run: yarn install
+- run: npm install
 - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 # run tests!
-      - run: yarn test
+      - run: npm run test
       - run: sudo apt-get update && sudo apt-get install -y python-dev
       - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
       - run: sudo python get-pip.py
       - run: sudo pip install awscli --upgrade
       - run: aws --version
       - run: aws s3 ls
-      - run: yarn run deploy
+      - run: npm run deploy
